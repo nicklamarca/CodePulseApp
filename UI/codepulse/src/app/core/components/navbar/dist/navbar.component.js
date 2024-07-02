@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.NavbarComponent = void 0;
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
 var NavbarComponent = /** @class */ (function () {
     function NavbarComponent() {
     }
@@ -15,7 +16,7 @@ var NavbarComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-navbar',
             standalone: true,
-            imports: [],
+            imports: [router_1.RouterLink],
             templateUrl: './navbar.component.html',
             styleUrl: './navbar.component.css'
         })
