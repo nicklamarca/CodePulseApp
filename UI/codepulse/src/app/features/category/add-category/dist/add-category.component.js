@@ -10,14 +10,27 @@ exports.AddCategoryComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var AddCategoryComponent = /** @class */ (function () {
-    function AddCategoryComponent() {
+    function AddCategoryComponent(categoryService) {
+        this.categoryService = categoryService;
         this.model = {
             name: '',
             urlHandle: ''
         };
     }
+    AddCategoryComponent.prototype.ngOnDestroy = function () {
+        var _a;
+        (_a = this.addCategorySubscription) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+    };
     AddCategoryComponent.prototype.onFormSubmit = function () {
-        console.log(this.model);
+        this.addCategorySubscription = this.categoryService.addCategory(this.model)
+            .subscribe({
+            next: function (response) {
+                console.log('This was successful');
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
     };
     AddCategoryComponent = __decorate([
         core_1.Component({
