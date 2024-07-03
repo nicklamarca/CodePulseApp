@@ -8,12 +8,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.CategoryService = void 0;
 var core_1 = require("@angular/core");
+var environment_1 = require("../../../../environments/environment");
 var CategoryService = /** @class */ (function () {
     function CategoryService(http) {
         this.http = http;
     }
     CategoryService.prototype.addCategory = function (model) {
-        return this.http.post('https://localhost:7024/api/categories', model);
+        return this.http.post(environment_1.environment.apiBaseUrl + "/api/categories", model);
+    };
+    CategoryService.prototype.getAllCategories = function () {
+        return this.http.get(environment_1.environment.apiBaseUrl + "/api/categories");
     };
     CategoryService = __decorate([
         core_1.Injectable({

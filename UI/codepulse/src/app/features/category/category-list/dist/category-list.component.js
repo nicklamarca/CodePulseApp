@@ -9,14 +9,27 @@ exports.__esModule = true;
 exports.CategoryListComponent = void 0;
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var common_1 = require("@angular/common");
 var CategoryListComponent = /** @class */ (function () {
-    function CategoryListComponent() {
+    function CategoryListComponent(categoryService) {
+        this.categoryService = categoryService;
     }
+    CategoryListComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.categoryService.getAllCategories().subscribe({
+            next: function (response) {
+                _this.categories = response;
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+    };
     CategoryListComponent = __decorate([
         core_1.Component({
             selector: 'app-category-list',
             standalone: true,
-            imports: [router_1.RouterLink],
+            imports: [router_1.RouterLink, common_1.CommonModule],
             templateUrl: './category-list.component.html',
             styleUrl: './category-list.component.css'
         })
