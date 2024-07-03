@@ -26,5 +26,10 @@ namespace CodePulse.API.Repositories.Implementation
         {
            return await _dbContext.Categories.ToListAsync();
         }
+
+        public async Task<Category?> GetCategoryByIdAsync(Guid id)
+        {
+           return await _dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
+        }
     }
 }
