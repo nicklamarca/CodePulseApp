@@ -10,8 +10,9 @@ exports.AddCategoryComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var AddCategoryComponent = /** @class */ (function () {
-    function AddCategoryComponent(categoryService) {
+    function AddCategoryComponent(categoryService, router) {
         this.categoryService = categoryService;
+        this.router = router;
         this.model = {
             name: '',
             urlHandle: ''
@@ -22,10 +23,11 @@ var AddCategoryComponent = /** @class */ (function () {
         (_a = this.addCategorySubscription) === null || _a === void 0 ? void 0 : _a.unsubscribe();
     };
     AddCategoryComponent.prototype.onFormSubmit = function () {
+        var _this = this;
         this.addCategorySubscription = this.categoryService.addCategory(this.model)
             .subscribe({
             next: function (response) {
-                console.log('This was successful');
+                _this.router.navigateByUrl('/admin/categories');
             },
             error: function (error) {
                 console.log(error);
