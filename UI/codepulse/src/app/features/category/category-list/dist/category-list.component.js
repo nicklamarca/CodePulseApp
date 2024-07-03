@@ -15,15 +15,7 @@ var CategoryListComponent = /** @class */ (function () {
         this.categoryService = categoryService;
     }
     CategoryListComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.categoryService.getAllCategories().subscribe({
-            next: function (response) {
-                _this.categories = response;
-            },
-            error: function (error) {
-                console.error(error);
-            }
-        });
+        this.categories$ = this.categoryService.getAllCategories();
     };
     CategoryListComponent = __decorate([
         core_1.Component({
