@@ -10,6 +10,7 @@ exports.CategoryListComponent = void 0;
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var common_1 = require("@angular/common");
+var http_1 = require("@angular/common/http");
 var CategoryListComponent = /** @class */ (function () {
     function CategoryListComponent(categoryService) {
         this.categoryService = categoryService;
@@ -21,7 +22,7 @@ var CategoryListComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-category-list',
             standalone: true,
-            imports: [router_1.RouterLink, common_1.CommonModule],
+            imports: [router_1.RouterLink, common_1.CommonModule, http_1.HttpClientModule],
             templateUrl: './category-list.component.html',
             styleUrl: './category-list.component.css'
         })

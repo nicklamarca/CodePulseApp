@@ -4,12 +4,13 @@ import { AddCategoryRequest } from '../models/add-category-request-model';
 import { CategoryService } from '../services/category.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-add-category',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, HttpClientModule],
   templateUrl: './add-category.component.html',
   styleUrl: './add-category.component.css'
 })

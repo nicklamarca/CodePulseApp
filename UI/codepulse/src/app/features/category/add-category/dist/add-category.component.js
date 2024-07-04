@@ -9,6 +9,7 @@ exports.__esModule = true;
 exports.AddCategoryComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
+var http_1 = require("@angular/common/http");
 var AddCategoryComponent = /** @class */ (function () {
     function AddCategoryComponent(categoryService, router) {
         this.categoryService = categoryService;
@@ -38,7 +39,7 @@ var AddCategoryComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-add-category',
             standalone: true,
-            imports: [forms_1.FormsModule],
+            imports: [forms_1.FormsModule, http_1.HttpClientModule],
             templateUrl: './add-category.component.html',
             styleUrl: './add-category.component.css'
         })
