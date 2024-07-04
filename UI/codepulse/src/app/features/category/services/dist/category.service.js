@@ -22,6 +22,9 @@ var CategoryService = /** @class */ (function () {
     CategoryService.prototype.getCategoryById = function (id) {
         return this.http.get(environment_1.environment.apiBaseUrl + "/api/categories/" + id);
     };
+    CategoryService.prototype.updateCategory = function (id, updateCategoryRequest) {
+        return this.http.put(environment_1.environment.apiBaseUrl + "/api/categories/" + id, updateCategoryRequest);
+    };
     CategoryService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

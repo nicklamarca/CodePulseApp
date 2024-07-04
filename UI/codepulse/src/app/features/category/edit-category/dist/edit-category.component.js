@@ -12,14 +12,16 @@ var common_1 = require("@angular/common");
 var http_1 = require("@angular/common/http");
 var forms_1 = require("@angular/forms");
 var EditCategoryComponent = /** @class */ (function () {
-    function EditCategoryComponent(route, categoryService) {
+    function EditCategoryComponent(route, categoryService, router) {
         this.route = route;
         this.categoryService = categoryService;
+        this.router = router;
         this.id = null;
     }
     EditCategoryComponent.prototype.ngOnDestroy = function () {
-        var _a;
+        var _a, _b;
         (_a = this.paramsSubscription) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        (_b = this.updateCategorySubscription) === null || _b === void 0 ? void 0 : _b.unsubscribe();
     };
     EditCategoryComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -38,7 +40,20 @@ var EditCategoryComponent = /** @class */ (function () {
         });
     };
     EditCategoryComponent.prototype.onFormSubmit = function () {
-        console.log(this.category);
+        var _this = this;
+        var _a, _b, _c, _d;
+        var updateCategoryRequest = {
+            name: (_b = (_a = this.category) === null || _a === void 0 ? void 0 : _a.name) !== null && _b !== void 0 ? _b : '',
+            urlHandle: (_d = (_c = this.category) === null || _c === void 0 ? void 0 : _c.urlHandle) !== null && _d !== void 0 ? _d : ''
+        };
+        if (this.id) {
+            this.updateCategorySubscription = this.categoryService.updateCategory(this.id, updateCategoryRequest)
+                .subscribe({
+                next: function (response) {
+                    _this.router.navigateByUrl('/admin/categories');
+                }
+            });
+        }
     };
     EditCategoryComponent = __decorate([
         core_1.Component({
