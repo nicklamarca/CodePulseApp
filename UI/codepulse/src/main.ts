@@ -6,11 +6,13 @@ import { provideRouter, withRouterConfig } from '@angular/router';
 import { routes } from './app/app.routes';
 import { importProvidersFrom } from '@angular/core'; // Import importProvidersFrom
 import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 bootstrapApplication(AppComponent, {
   ...appConfig,
   providers: [
-    importProvidersFrom(HttpClientModule), // Add HttpClientModule to providers
+    importProvidersFrom(HttpClientModule), 
     provideHttpClient(),
     provideRouter(routes, withRouterConfig({})),
     // ... other providers if any
