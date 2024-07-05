@@ -2,6 +2,7 @@
 using CodePulse.API.Models.Domain;
 using CodePulse.API.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 namespace CodePulse.API.Repositories.Implementation
 {
@@ -20,6 +21,21 @@ namespace CodePulse.API.Repositories.Implementation
             await _dbContext.SaveChangesAsync();
 
             return category;
+        }
+
+        public async Task<Category?> DeleteCategoryAsync(Guid id)
+        {
+          var existingCategory =  await _dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
+            if(existingCategory is null)
+            {
+                return null;
+            }
+
+            _dbContext.Categories.Remove(existingCategory);
+            await _dbContext.SaveChangesAsync();
+
+            return existingCategory;
+            
         }
 
         public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
