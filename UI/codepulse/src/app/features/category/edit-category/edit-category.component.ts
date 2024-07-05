@@ -20,6 +20,7 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
   id: string | null = null;
   paramsSubscription: Subscription | undefined;
   updateCategorySubscription: Subscription | undefined;
+  deleteCategorySubscription: Subscription | undefined;
 
   category: Category | undefined;
 
@@ -32,6 +33,7 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.paramsSubscription?.unsubscribe();
     this.updateCategorySubscription?.unsubscribe();
+    this.deleteCategorySubscription?.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -65,6 +67,16 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
       });
     }
   }
-     
+
+  onDelete(): void {
+    if(this.id) {
+    this.deleteCategorySubscription = this.categoryService.deleteCategory(this.id)
+    .subscribe({
+      next: (response) => {
+        this.router.navigateByUrl('/admin/categories');
+      }
+    });
+  }
+} 
      
 }

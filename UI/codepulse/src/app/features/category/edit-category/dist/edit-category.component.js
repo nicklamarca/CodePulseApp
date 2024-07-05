@@ -19,9 +19,10 @@ var EditCategoryComponent = /** @class */ (function () {
         this.id = null;
     }
     EditCategoryComponent.prototype.ngOnDestroy = function () {
-        var _a, _b;
+        var _a, _b, _c;
         (_a = this.paramsSubscription) === null || _a === void 0 ? void 0 : _a.unsubscribe();
         (_b = this.updateCategorySubscription) === null || _b === void 0 ? void 0 : _b.unsubscribe();
+        (_c = this.deleteCategorySubscription) === null || _c === void 0 ? void 0 : _c.unsubscribe();
     };
     EditCategoryComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -48,6 +49,17 @@ var EditCategoryComponent = /** @class */ (function () {
         };
         if (this.id) {
             this.updateCategorySubscription = this.categoryService.updateCategory(this.id, updateCategoryRequest)
+                .subscribe({
+                next: function (response) {
+                    _this.router.navigateByUrl('/admin/categories');
+                }
+            });
+        }
+    };
+    EditCategoryComponent.prototype.onDelete = function () {
+        var _this = this;
+        if (this.id) {
+            this.deleteCategorySubscription = this.categoryService.deleteCategory(this.id)
                 .subscribe({
                 next: function (response) {
                     _this.router.navigateByUrl('/admin/categories');

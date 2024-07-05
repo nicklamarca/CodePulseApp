@@ -25,6 +25,9 @@ var CategoryService = /** @class */ (function () {
     CategoryService.prototype.updateCategory = function (id, updateCategoryRequest) {
         return this.http.put(environment_1.environment.apiBaseUrl + "/api/categories/" + id, updateCategoryRequest);
     };
+    CategoryService.prototype.deleteCategory = function (id) {
+        return this.http["delete"](environment_1.environment.apiBaseUrl + "/api/categories/" + id);
+    };
     CategoryService = __decorate([
         core_1.Injectable({
             providedIn: 'root'
