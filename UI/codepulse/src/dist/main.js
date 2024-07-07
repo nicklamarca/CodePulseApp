@@ -19,8 +19,10 @@ var router_1 = require("@angular/router");
 var app_routes_1 = require("./app/app.routes");
 var core_1 = require("@angular/core"); // Import importProvidersFrom
 var http_2 = require("@angular/common/http"); // Import HttpClientModule
+var ngx_markdown_1 = require("ngx-markdown");
 platform_browser_1.bootstrapApplication(app_component_1.AppComponent, __assign(__assign({}, app_config_1.appConfig), { providers: [
         core_1.importProvidersFrom(http_2.HttpClientModule),
+        core_1.importProvidersFrom(ngx_markdown_1.MarkdownModule.forRoot()),
         http_1.provideHttpClient(),
         router_1.provideRouter(app_routes_1.routes, router_1.withRouterConfig({})),
     ] }))["catch"](function (err) { return console.error(err); });

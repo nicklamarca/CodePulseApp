@@ -10,6 +10,7 @@ exports.AddBlogpostComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var common_1 = require("@angular/common");
+var ngx_markdown_1 = require("ngx-markdown");
 var AddBlogpostComponent = /** @class */ (function () {
     function AddBlogpostComponent(blogPostService, router) {
         this.blogPostService = blogPostService;
@@ -40,7 +41,7 @@ var AddBlogpostComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-add-blogpost',
             standalone: true,
-            imports: [forms_1.FormsModule, common_1.CommonModule],
+            imports: [forms_1.FormsModule, common_1.CommonModule, ngx_markdown_1.MarkdownModule],
             templateUrl: './add-blogpost.component.html',
             styleUrl: './add-blogpost.component.css'
         })
