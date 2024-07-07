@@ -11,7 +11,9 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var common_1 = require("@angular/common");
 var AddBlogpostComponent = /** @class */ (function () {
-    function AddBlogpostComponent() {
+    function AddBlogpostComponent(blogPostService, router) {
+        this.blogPostService = blogPostService;
+        this.router = router;
         this.model = {
             title: '',
             urlHandle: '',
@@ -24,7 +26,15 @@ var AddBlogpostComponent = /** @class */ (function () {
         };
     }
     AddBlogpostComponent.prototype.onFormSubmit = function () {
-        console.log(this.model);
+        var _this = this;
+        this.blogPostService.createBlogPost(this.model).subscribe({
+            next: function (response) {
+                _this.router.navigateByUrl('/admin/blogposts');
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
     };
     AddBlogpostComponent = __decorate([
         core_1.Component({
