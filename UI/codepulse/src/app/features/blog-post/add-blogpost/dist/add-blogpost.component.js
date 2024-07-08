@@ -12,9 +12,10 @@ var forms_1 = require("@angular/forms");
 var common_1 = require("@angular/common");
 var ngx_markdown_1 = require("ngx-markdown");
 var AddBlogpostComponent = /** @class */ (function () {
-    function AddBlogpostComponent(blogPostService, router) {
+    function AddBlogpostComponent(blogPostService, router, categoryService) {
         this.blogPostService = blogPostService;
         this.router = router;
+        this.categoryService = categoryService;
         this.model = {
             title: '',
             urlHandle: '',
@@ -26,6 +27,9 @@ var AddBlogpostComponent = /** @class */ (function () {
             isVisible: true
         };
     }
+    AddBlogpostComponent.prototype.ngOnInit = function () {
+        this.categories$ = this.categoryService.getAllCategories();
+    };
     AddBlogpostComponent.prototype.onFormSubmit = function () {
         var _this = this;
         this.blogPostService.createBlogPost(this.model).subscribe({
