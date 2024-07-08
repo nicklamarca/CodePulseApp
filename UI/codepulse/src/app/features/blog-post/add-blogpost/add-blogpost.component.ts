@@ -33,7 +33,8 @@ export class AddBlogpostComponent implements OnInit {
       featuredImageUrl: '',
       publishedDate: new Date(),
       author: '',
-      isVisible: true
+      isVisible: true,
+      categories: []
     }
   }
   ngOnInit(): void {
@@ -41,6 +42,7 @@ export class AddBlogpostComponent implements OnInit {
   }
 
   onFormSubmit(): void {
+    console.log(this.model);
     this.blogPostService.createBlogPost(this.model).subscribe({
       next: (response) => {
         this.router.navigateByUrl('/admin/blogposts');

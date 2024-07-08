@@ -24,7 +24,8 @@ var AddBlogpostComponent = /** @class */ (function () {
             featuredImageUrl: '',
             publishedDate: new Date(),
             author: '',
-            isVisible: true
+            isVisible: true,
+            categories: []
         };
     }
     AddBlogpostComponent.prototype.ngOnInit = function () {
@@ -32,6 +33,7 @@ var AddBlogpostComponent = /** @class */ (function () {
     };
     AddBlogpostComponent.prototype.onFormSubmit = function () {
         var _this = this;
+        console.log(this.model);
         this.blogPostService.createBlogPost(this.model).subscribe({
             next: function (response) {
                 _this.router.navigateByUrl('/admin/blogposts');

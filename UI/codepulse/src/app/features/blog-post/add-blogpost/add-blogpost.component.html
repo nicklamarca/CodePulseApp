@@ -68,7 +68,7 @@
         <label for="categories" class="form-label">Categories</label>
 
         <ng-container *ngIf="categories$ | async as categories">
-          <select class="form-control" id="categories" name="categories" multiple >
+          <select class="form-control" id="categories" name="categories" multiple [(ngModel)]="model.categories">
            <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
           </select>
         </ng-container>
