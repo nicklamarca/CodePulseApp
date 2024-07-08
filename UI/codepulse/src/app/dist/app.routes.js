@@ -31,5 +31,5 @@ exports.routes = [
     {
         path: 'admin/blogposts/:id',
         component: edit_blogpost_component_1.EditBlogpostComponent
-    },
+    }
 ];
