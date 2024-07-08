@@ -6,6 +6,7 @@ var add_category_component_1 = require("./features/category/add-category/add-cat
 var edit_category_component_1 = require("./features/category/edit-category/edit-category.component");
 var blogpost_list_component_1 = require("./features/blog-post/blogpost-list/blogpost-list.component");
 var add_blogpost_component_1 = require("./features/blog-post/add-blogpost/add-blogpost.component");
+var edit_blogpost_component_1 = require("./features/blog-post/edit-blogpost/edit-blogpost.component");
 exports.routes = [
     {
         path: 'admin/categories',
@@ -26,5 +27,9 @@ exports.routes = [
     {
         path: 'admin/blogposts/add',
         component: add_blogpost_component_1.AddBlogpostComponent
+    },
+    {
+        path: 'admin/blogposts/:id',
+        component: edit_blogpost_component_1.EditBlogpostComponent
     },
 ];
