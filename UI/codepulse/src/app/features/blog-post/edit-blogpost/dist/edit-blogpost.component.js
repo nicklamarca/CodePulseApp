@@ -12,18 +12,44 @@ var forms_1 = require("@angular/forms");
 var common_1 = require("@angular/common");
 var ngx_markdown_1 = require("ngx-markdown");
 var EditBlogpostComponent = /** @class */ (function () {
-    function EditBlogpostComponent(route, blogPostService, categoryService) {
+    function EditBlogpostComponent(route, blogPostService, categoryService, router) {
         this.route = route;
         this.blogPostService = blogPostService;
         this.categoryService = categoryService;
+        this.router = router;
         this.id = null;
     }
     EditBlogpostComponent.prototype.ngOnDestroy = function () {
-        var _a;
+        var _a, _b, _c;
         (_a = this.routeSubscription) === null || _a === void 0 ? void 0 : _a.unsubscribe();
+        (_b = this.updateBlogPostSubscription) === null || _b === void 0 ? void 0 : _b.unsubscribe();
+        (_c = this.getBlogPostSubscription) === null || _c === void 0 ? void 0 : _c.unsubscribe();
     };
     EditBlogpostComponent.prototype.onFormSubmit = function () {
-        console.log(this.model);
+        var _this = this;
+        var _a;
+        //Convert model to request obj
+        if (this.model && this.id) {
+            var updateBlogPost = {
+                author: this.model.author,
+                content: this.model.content,
+                featuredImageUrl: this.model.featuredImageUrl,
+                isVisible: this.model.isVisible,
+                publishedDate: this.model.publishedDate,
+                shortDescription: this.model.shortDescription,
+                title: this.model.title,
+                urlHandle: this.model.urlHandle,
+                categories: (_a = this.selectedCategories) !== null && _a !== void 0 ? _a : []
+            };
+            this.updateBlogPostSubscription = this.blogPostService.updateBlogPost(this.id, updateBlogPost).subscribe({
+                next: function (response) {
+                    _this.router.navigateByUrl('/admin/blogposts');
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
     };
     EditBlogpostComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -33,7 +59,7 @@ var EditBlogpostComponent = /** @class */ (function () {
                 _this.id = params.get('id');
                 //Get BlogPost from API
                 if (_this.id) {
-                    _this.blogPostService.getBlogPostById(_this.id).subscribe({
+                    _this.getBlogPostSubscription = _this.blogPostService.getBlogPostById(_this.id).subscribe({
                         next: function (response) {
                             _this.model = response;
                             _this.selectedCategories = response.categories.map(function (c) { return c.id; });
