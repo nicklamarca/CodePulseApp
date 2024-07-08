@@ -12,9 +12,10 @@ var forms_1 = require("@angular/forms");
 var common_1 = require("@angular/common");
 var ngx_markdown_1 = require("ngx-markdown");
 var EditBlogpostComponent = /** @class */ (function () {
-    function EditBlogpostComponent(route, blogPostService) {
+    function EditBlogpostComponent(route, blogPostService, categoryService) {
         this.route = route;
         this.blogPostService = blogPostService;
+        this.categoryService = categoryService;
         this.id = null;
     }
     EditBlogpostComponent.prototype.ngOnDestroy = function () {
@@ -26,6 +27,7 @@ var EditBlogpostComponent = /** @class */ (function () {
     };
     EditBlogpostComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.categories$ = this.categoryService.getAllCategories();
         this.routeSubscription = this.route.paramMap.subscribe({
             next: function (params) {
                 _this.id = params.get('id');
@@ -34,6 +36,7 @@ var EditBlogpostComponent = /** @class */ (function () {
                     _this.blogPostService.getBlogPostById(_this.id).subscribe({
                         next: function (response) {
                             _this.model = response;
+                            _this.selectedCategories = response.categories.map(function (c) { return c.id; });
                         },
                         error: function (error) {
                             console.error(error);

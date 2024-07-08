@@ -1,11 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { BlogPostService } from '../services/blog-post.service';
 import { BlogPost } from '../models/blog-post.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MarkdownModule } from 'ngx-markdown';
+import { CategoryService } from '../../category/services/category.service';
+import { Category } from '../../category/models/category.model';
 
 @Component({
   selector: 'app-edit-blogpost',
@@ -18,11 +20,14 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
 
   id:string | null = null;
   model: BlogPost | undefined;
+  categories$: Observable<Category[]> | undefined;
+  selectedCategories: string[] | undefined;
 
   routeSubscription: Subscription | undefined;
 
   constructor(private route: ActivatedRoute,
-              private blogPostService: BlogPostService
+              private blogPostService: BlogPostService,
+              private categoryService: CategoryService
   ) {}
 
 
@@ -36,6 +41,9 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+   
+   this.categories$ = this.categoryService.getAllCategories();
+  
    this.routeSubscription = this.route.paramMap.subscribe({
       next: (params) => {
         this.id = params.get('id');
@@ -46,6 +54,7 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
             this.blogPostService.getBlogPostById(this.id).subscribe({
               next: (response) => {
                 this.model = response;
+                this.selectedCategories = response.categories.map(c => c.id);
               },
               error: (error) => {
                 console.error(error);
