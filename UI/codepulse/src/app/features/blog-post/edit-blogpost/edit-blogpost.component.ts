@@ -9,13 +9,14 @@ import { MarkdownModule } from 'ngx-markdown';
 import { CategoryService } from '../../category/services/category.service';
 import { Category } from '../../category/models/category.model';
 import { UpdateBlogPost } from '../models/update-blog-post.model';
+import { ImageSelectorComponent } from "../../../shared/components/image-selector/image-selector.component";
 
 @Component({
-  selector: 'app-edit-blogpost',
-  standalone: true,
-  imports: [FormsModule, CommonModule, MarkdownModule],
-  templateUrl: './edit-blogpost.component.html',
-  styleUrl: './edit-blogpost.component.css'
+    selector: 'app-edit-blogpost',
+    standalone: true,
+    templateUrl: './edit-blogpost.component.html',
+    styleUrl: './edit-blogpost.component.css',
+    imports: [FormsModule, CommonModule, MarkdownModule, ImageSelectorComponent]
 })
 export class EditBlogpostComponent implements OnInit, OnDestroy {
 
@@ -23,6 +24,7 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
   model: BlogPost | undefined;
   categories$: Observable<Category[]> | undefined;
   selectedCategories: string[] | undefined;
+  imageSelectorVisible: boolean = false;
 
   routeSubscription: Subscription | undefined;
   updateBlogPostSubscription: Subscription | undefined;
@@ -42,6 +44,16 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
     this.getBlogPostSubscription?.unsubscribe();
     this.deleteBlogPostSubscription?.unsubscribe();
 
+  }
+
+  openImageSelector():void
+  {
+    this.imageSelectorVisible = true;
+  }
+
+  closeImageSelector():void
+  {
+    this.imageSelectorVisible = false;
   }
 
   onDelete():void

@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var common_1 = require("@angular/common");
 var ngx_markdown_1 = require("ngx-markdown");
+var image_selector_component_1 = require("../../../shared/components/image-selector/image-selector.component");
 var EditBlogpostComponent = /** @class */ (function () {
     function EditBlogpostComponent(route, blogPostService, categoryService, router) {
         this.route = route;
@@ -18,6 +19,7 @@ var EditBlogpostComponent = /** @class */ (function () {
         this.categoryService = categoryService;
         this.router = router;
         this.id = null;
+        this.imageSelectorVisible = false;
     }
     EditBlogpostComponent.prototype.ngOnDestroy = function () {
         var _a, _b, _c, _d;
@@ -25,6 +27,12 @@ var EditBlogpostComponent = /** @class */ (function () {
         (_b = this.updateBlogPostSubscription) === null || _b === void 0 ? void 0 : _b.unsubscribe();
         (_c = this.getBlogPostSubscription) === null || _c === void 0 ? void 0 : _c.unsubscribe();
         (_d = this.deleteBlogPostSubscription) === null || _d === void 0 ? void 0 : _d.unsubscribe();
+    };
+    EditBlogpostComponent.prototype.openImageSelector = function () {
+        this.imageSelectorVisible = true;
+    };
+    EditBlogpostComponent.prototype.closeImageSelector = function () {
+        this.imageSelectorVisible = false;
     };
     EditBlogpostComponent.prototype.onDelete = function () {
         var _this = this;
@@ -90,9 +98,9 @@ var EditBlogpostComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-edit-blogpost',
             standalone: true,
-            imports: [forms_1.FormsModule, common_1.CommonModule, ngx_markdown_1.MarkdownModule],
             templateUrl: './edit-blogpost.component.html',
-            styleUrl: './edit-blogpost.component.css'
+            styleUrl: './edit-blogpost.component.css',
+            imports: [forms_1.FormsModule, common_1.CommonModule, ngx_markdown_1.MarkdownModule, image_selector_component_1.ImageSelectorComponent]
         })
     ], EditBlogpostComponent);
     return EditBlogpostComponent;
