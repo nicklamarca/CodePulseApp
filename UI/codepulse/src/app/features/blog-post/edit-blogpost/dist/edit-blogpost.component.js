@@ -20,10 +20,24 @@ var EditBlogpostComponent = /** @class */ (function () {
         this.id = null;
     }
     EditBlogpostComponent.prototype.ngOnDestroy = function () {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         (_a = this.routeSubscription) === null || _a === void 0 ? void 0 : _a.unsubscribe();
         (_b = this.updateBlogPostSubscription) === null || _b === void 0 ? void 0 : _b.unsubscribe();
         (_c = this.getBlogPostSubscription) === null || _c === void 0 ? void 0 : _c.unsubscribe();
+        (_d = this.deleteBlogPostSubscription) === null || _d === void 0 ? void 0 : _d.unsubscribe();
+    };
+    EditBlogpostComponent.prototype.onDelete = function () {
+        var _this = this;
+        if (this.id) {
+            this.deleteBlogPostSubscription = this.blogPostService.deleteBlogPost(this.id).subscribe({
+                next: function (response) {
+                    _this.router.navigateByUrl('/admin/blogposts');
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
     };
     EditBlogpostComponent.prototype.onFormSubmit = function () {
         var _this = this;

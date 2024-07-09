@@ -54,6 +54,21 @@ namespace CodePulse.API.Repositories.Implementation
 
             return blogPost;
         }
+
+        public async Task<BlogPost?> DeleteBlogPostAsync(Guid id)
+        {
+            var existingBlogPost = await _dbContext.BlogPosts.FirstOrDefaultAsync(c => c.Id == id);
+            if (existingBlogPost is null)
+            {
+                return null;
+            }
+
+            _dbContext.BlogPosts.Remove(existingBlogPost);
+            await _dbContext.SaveChangesAsync();
+
+            return existingBlogPost;
+
+        }
     }
 
 }
