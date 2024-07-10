@@ -7,7 +7,12 @@ var edit_category_component_1 = require("./features/category/edit-category/edit-
 var blogpost_list_component_1 = require("./features/blog-post/blogpost-list/blogpost-list.component");
 var add_blogpost_component_1 = require("./features/blog-post/add-blogpost/add-blogpost.component");
 var edit_blogpost_component_1 = require("./features/blog-post/edit-blogpost/edit-blogpost.component");
+var home_component_1 = require("./features/public/home/home.component");
 exports.routes = [
+    {
+        path: '',
+        component: home_component_1.HomeComponent
+    },
     {
         path: 'admin/categories',
         component: category_list_component_1.CategoryListComponent
