@@ -1,0 +1,63 @@
+.cool-container {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cool-title {
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+}
+
+.cool-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cool-label {
+    font-weight: bold;
+    color: #555;
+}
+
+.cool-input, .cool-textarea, .cool-select {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.cool-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px; /* Reduced padding */
+    font-size: 14px; /* Reduced font size */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cool-button:hover {
+    background-color: #0056b3;
+}
+
+.cool-delete-button {
+    background-color: #dc3545; /* Red background for delete button */
+}
+
+.cool-delete-button:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+.cool-checkbox {
+    margin-right: 10px;
+}
+
+.cool-image {
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
