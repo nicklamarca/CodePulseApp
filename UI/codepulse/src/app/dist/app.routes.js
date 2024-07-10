@@ -8,10 +8,15 @@ var blogpost_list_component_1 = require("./features/blog-post/blogpost-list/blog
 var add_blogpost_component_1 = require("./features/blog-post/add-blogpost/add-blogpost.component");
 var edit_blogpost_component_1 = require("./features/blog-post/edit-blogpost/edit-blogpost.component");
 var home_component_1 = require("./features/public/home/home.component");
+var blog_details_component_1 = require("./features/public/blog-details/blog-details.component");
 exports.routes = [
     {
         path: '',
         component: home_component_1.HomeComponent
+    },
+    {
+        path: 'blog/:urlHandle',
+        component: blog_details_component_1.BlogDetailsComponent
     },
     {
         path: 'admin/categories',
