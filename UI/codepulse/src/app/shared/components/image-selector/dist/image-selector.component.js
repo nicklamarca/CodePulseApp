@@ -9,18 +9,28 @@ exports.__esModule = true;
 exports.ImageSelectorComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
+var common_1 = require("@angular/common");
 var ImageSelectorComponent = /** @class */ (function () {
     function ImageSelectorComponent(imageService) {
         this.imageService = imageService;
         this.fileName = '';
         this.title = '';
     }
+    ImageSelectorComponent.prototype.ngOnInit = function () {
+        this.getImages();
+    };
+    ImageSelectorComponent.prototype.getImages = function () {
+        this.images$ = this.imageService.getAllImages();
+    };
     ImageSelectorComponent.prototype.uploadImage = function () {
+        var _this = this;
         if (this.file && this.fileName !== '' && this.title !== '') {
             //Image Service to upload the image
             this.imageService.uploadImage(this.file, this.fileName, this.title).subscribe({
                 next: function (response) {
-                    console.log(response);
+                    var _a;
+                    (_a = _this.imageUploadForm) === null || _a === void 0 ? void 0 : _a.reset();
+                    _this.getImages();
                 },
                 error: function (error) {
                     console.log(error);
@@ -33,11 +43,14 @@ var ImageSelectorComponent = /** @class */ (function () {
         var element = event.target;
         this.file = (_a = element.files) === null || _a === void 0 ? void 0 : _a[0];
     };
+    __decorate([
+        core_1.ViewChild('form', { static: false })
+    ], ImageSelectorComponent.prototype, "imageUploadForm");
     ImageSelectorComponent = __decorate([
         core_1.Component({
             selector: 'app-image-selector',
             standalone: true,
-            imports: [forms_1.FormsModule],
+            imports: [forms_1.FormsModule, common_1.CommonModule],
             templateUrl: './image-selector.component.html',
             styleUrl: './image-selector.component.css'
         })

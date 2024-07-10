@@ -20,6 +20,9 @@ var ImageService = /** @class */ (function () {
         formData.append('title', title);
         return this.http.post(environment_1.environment.apiBaseUrl + "/api/images", formData);
     };
+    ImageService.prototype.getAllImages = function () {
+        return this.http.get(environment_1.environment.apiBaseUrl + "/api/images");
+    };
     ImageService = __decorate([
         core_1.Injectable({
             providedIn: 'root'
