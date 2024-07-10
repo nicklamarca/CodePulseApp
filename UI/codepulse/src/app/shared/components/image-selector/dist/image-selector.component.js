@@ -22,6 +22,9 @@ var ImageSelectorComponent = /** @class */ (function () {
     ImageSelectorComponent.prototype.getImages = function () {
         this.images$ = this.imageService.getAllImages();
     };
+    ImageSelectorComponent.prototype.selectImage = function (image) {
+        this.imageService.selectImage(image);
+    };
     ImageSelectorComponent.prototype.uploadImage = function () {
         var _this = this;
         if (this.file && this.fileName !== '' && this.title !== '') {

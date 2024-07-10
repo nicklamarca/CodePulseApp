@@ -8,10 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.ImageService = void 0;
 var core_1 = require("@angular/core");
+var rxjs_1 = require("rxjs");
 var environment_1 = require("../../../../environments/environment");
 var ImageService = /** @class */ (function () {
     function ImageService(http) {
         this.http = http;
+        this.selectedImage = new rxjs_1.BehaviorSubject({
+            id: '',
+            url: '',
+            title: '',
+            fileName: '',
+            fileExtension: ''
+        });
     }
     ImageService.prototype.uploadImage = function (file, fileName, title) {
         var formData = new FormData();
@@ -22,6 +30,12 @@ var ImageService = /** @class */ (function () {
     };
     ImageService.prototype.getAllImages = function () {
         return this.http.get(environment_1.environment.apiBaseUrl + "/api/images");
+    };
+    ImageService.prototype.selectImage = function (image) {
+        this.selectedImage.next(image);
+    };
+    ImageService.prototype.onSelectImage = function () {
+        return this.selectedImage.asObservable();
     };
     ImageService = __decorate([
         core_1.Injectable({

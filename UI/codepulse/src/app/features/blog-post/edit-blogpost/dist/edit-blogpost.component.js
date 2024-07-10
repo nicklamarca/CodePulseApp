@@ -13,20 +13,22 @@ var common_1 = require("@angular/common");
 var ngx_markdown_1 = require("ngx-markdown");
 var image_selector_component_1 = require("../../../shared/components/image-selector/image-selector.component");
 var EditBlogpostComponent = /** @class */ (function () {
-    function EditBlogpostComponent(route, blogPostService, categoryService, router) {
+    function EditBlogpostComponent(route, blogPostService, categoryService, router, imageService) {
         this.route = route;
         this.blogPostService = blogPostService;
         this.categoryService = categoryService;
         this.router = router;
+        this.imageService = imageService;
         this.id = null;
         this.imageSelectorVisible = false;
     }
     EditBlogpostComponent.prototype.ngOnDestroy = function () {
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e;
         (_a = this.routeSubscription) === null || _a === void 0 ? void 0 : _a.unsubscribe();
         (_b = this.updateBlogPostSubscription) === null || _b === void 0 ? void 0 : _b.unsubscribe();
         (_c = this.getBlogPostSubscription) === null || _c === void 0 ? void 0 : _c.unsubscribe();
         (_d = this.deleteBlogPostSubscription) === null || _d === void 0 ? void 0 : _d.unsubscribe();
+        (_e = this.imageSelectorSubscription) === null || _e === void 0 ? void 0 : _e.unsubscribe();
     };
     EditBlogpostComponent.prototype.openImageSelector = function () {
         this.imageSelectorVisible = true;
@@ -91,6 +93,15 @@ var EditBlogpostComponent = /** @class */ (function () {
                         }
                     });
                 }
+                _this.imageSelectorSubscription = _this.imageService.onSelectImage()
+                    .subscribe({
+                    next: function (response) {
+                        if (_this.model) {
+                            _this.model.featuredImageUrl = response.url;
+                            _this.imageSelectorVisible = false;
+                        }
+                    }
+                });
             }
         });
     };
