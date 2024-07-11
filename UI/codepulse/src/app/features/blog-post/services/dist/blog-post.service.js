@@ -28,6 +28,9 @@ var BlogPostService = /** @class */ (function () {
     BlogPostService.prototype.deleteBlogPost = function (id) {
         return this.http["delete"](environment_1.environment.apiBaseUrl + "/api/blogposts/" + id);
     };
+    BlogPostService.prototype.getBlogPostByUrlHandle = function (urlHandle) {
+        return this.http.get(environment_1.environment.apiBaseUrl + "/api/blogposts/" + urlHandle);
+    };
     BlogPostService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

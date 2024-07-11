@@ -23,3 +23,8 @@
 .custom-file-input::file-selector-button:hover {
     background-color: #0056b3;
 }
+
+.blog-content img{
+    max-width: 100%;
+    margin: 2em 0 2em 0;
+}
