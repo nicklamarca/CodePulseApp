@@ -69,6 +69,13 @@ namespace CodePulse.API.Repositories.Implementation
             return existingBlogPost;
 
         }
+
+        public async Task<BlogPost?> GetBlogPostByUrlHandleAsync(string urlHandle)
+        {
+            return await _dbContext.BlogPosts
+                                .Include(x => x.Categories)
+                                .FirstOrDefaultAsync(x => x.UrlHandle == urlHandle);
+        }
     }
 
 }

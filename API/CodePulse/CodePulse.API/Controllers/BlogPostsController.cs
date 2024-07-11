@@ -140,8 +140,44 @@ namespace CodePulse.API.Controllers
             return Ok(response);
         }
 
-        //PUT: https://localhost:7024/api/blogposts/{id}
-        [HttpPut]
+        //GET: https://localhost:7024/api/blogposts/{urlHandle}
+        [HttpGet]
+        [Route("{urlHandle}")]
+        public async Task<IActionResult> GetBlogPostByUrlHandle([FromRoute] string urlHandle)
+        {
+            //Get BlogPost From Repository
+            var blogPost = await _blogPostRepository.GetBlogPostByUrlHandleAsync(urlHandle);
+
+            if (blogPost == null)
+            {
+                return NotFound();
+            }
+
+            //Map Domain model to DTO
+            var response = new BlogPostDto
+            {
+                Id = blogPost.Id,
+                Title = blogPost.Title,
+                ShortDescription = blogPost.ShortDescription,
+                Content = blogPost.Content,
+                FeaturedImageUrl = blogPost.FeaturedImageUrl,
+                UrlHandle = blogPost.UrlHandle,
+                PublishedDate = blogPost.PublishedDate,
+                Author = blogPost.Author,
+                IsVisible = blogPost.IsVisible,
+                Categories = blogPost.Categories.Select(x => new CategoryDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle
+                }).ToList()
+            };
+
+            return Ok(response);
+        }
+
+            //PUT: https://localhost:7024/api/blogposts/{id}
+            [HttpPut]
         [Route("{id:Guid}")]
         public async Task<IActionResult> UpdateBlogPost([FromRoute] Guid id, [FromBody] UpdateBlogPostRequestDto request)
         {
