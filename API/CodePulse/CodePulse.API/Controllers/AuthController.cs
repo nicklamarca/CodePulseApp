@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 
 namespace CodePulse.API.Controllers
 {
@@ -14,6 +15,85 @@ namespace CodePulse.API.Controllers
         public AuthController(UserManager<IdentityUser> userManager)
         {
             _userManager = userManager;
+        }
+
+        //POST : https://localhost:xxxx/api/auth/login
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
+        {
+           //Find user by email
+           var identityUser = await _userManager.FindByEmailAsync(request.Email);
+
+           if(identityUser != null)
+            {
+                //Check Password 
+               var isCorrectPassword =  await _userManager.CheckPasswordAsync(identityUser, request.Password);
+                if (isCorrectPassword)
+                {
+                    var roles = await _userManager.GetRolesAsync(identityUser);
+
+                    //Create a Token and Response
+                    var response = new LoginResponseDto
+                    {
+                        Email = request.Email,
+                        Roles = roles.ToList(),
+                        Token = "TOKEN"
+                    };
+
+                    return Ok(response);
+                }
+
+            }
+
+           ModelState.AddModelError("Unauthorized", "Invalid Email or Password");
+
+           return ValidationProblem(ModelState);
+
+            ////Find user by email
+            //var user = await _userManager.FindByEmailAsync(request.Email);
+
+            //if (user == null)
+            //{
+            //    return Unauthorized();
+            //}
+
+            ////Check if password is correct
+            //var isCorrectPassword = await _userManager.CheckPasswordAsync(user, request.Password);
+
+            //if (!isCorrectPassword)
+            //{
+            //    return Unauthorized();
+            //}
+
+            ////Create claims
+            //var claims = new List<Claim>
+            //{
+            //    new Claim(ClaimTypes.NameIdentifier, user.Id),
+            //    new Claim(ClaimTypes.Name, user.UserName)
+            //};
+
+            ////Get roles for user
+            //var roles = await _userManager.GetRolesAsync(user);
+
+            //foreach (var role in roles)
+            //{
+            //    claims.Add(new Claim(ClaimTypes.Role, role));
+            //}
+
+            ////Create token
+            //var tokenHandler = new JwtSecurityTokenHandler();
+            //var key = Encoding.ASCII.GetBytes("super secret key");
+            //var tokenDescriptor = new SecurityTokenDescriptor
+            //{
+            //    Subject = new ClaimsIdentity(claims),
+            //    Expires = DateTime.UtcNow.AddHours(1),
+            //    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            //};
+
+            //var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            //return Ok(new { token = tokenHandler.WriteToken(token) });
         }
 
 
