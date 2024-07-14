@@ -10,14 +10,22 @@ exports.LoginComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent() {
+    function LoginComponent(authService) {
+        this.authService = authService;
         this.model = {
             email: '',
             password: ''
         };
     }
     LoginComponent.prototype.onSubmit = function () {
-        console.log(this.model);
+        this.authService.login(this.model).subscribe({
+            next: function (response) {
+                console.log(response);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
     };
     LoginComponent = __decorate([
         core_1.Component({
