@@ -9,10 +9,15 @@ var add_blogpost_component_1 = require("./features/blog-post/add-blogpost/add-bl
 var edit_blogpost_component_1 = require("./features/blog-post/edit-blogpost/edit-blogpost.component");
 var home_component_1 = require("./features/public/home/home.component");
 var blog_details_component_1 = require("./features/public/blog-details/blog-details.component");
+var login_component_1 = require("./features/auth/login/login.component");
 exports.routes = [
     {
         path: '',
         component: home_component_1.HomeComponent
+    },
+    {
+        path: 'login',
+        component: login_component_1.LoginComponent
     },
     {
         path: 'blog/:urlHandle',
