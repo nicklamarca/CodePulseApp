@@ -9,7 +9,9 @@ namespace CodePulse.API.Repositories.Interface
 
         Task<IEnumerable<Category>> GetAllCategoriesAsync(string? query = null,
                                                           string? sortBy = null,
-                                                          string? sortDirection = null);
+                                                          string? sortDirection = null,
+                                                          int? pageNumber = 1,
+                                                          int? pageSize = 10);
 
         Task<Category?> GetCategoryByIdAsync(Guid id);
 

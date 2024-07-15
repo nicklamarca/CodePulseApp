@@ -40,7 +40,9 @@ namespace CodePulse.API.Repositories.Implementation
 
         public async Task<IEnumerable<Category>> GetAllCategoriesAsync(string? query = null, 
                                                                        string? sortBy = null,
-                                                                       string? sortDirection = null)
+                                                                       string? sortDirection = null,
+                                                                       int? pageNumber = 1,
+                                                                       int? pageSize = 10)
         {
             // Basic Implementation
            //return await _dbContext.Categories.ToListAsync();
@@ -84,7 +86,9 @@ namespace CodePulse.API.Repositories.Implementation
                 }
             }
 
-           //Pagination
+            //Pagination
+           var skipRecords = (pageNumber - 1) * pageSize;
+           categories = categories.Skip(skipRecords ?? 0).Take(pageSize ?? 10);
 
            return await categories.ToListAsync();
         }
