@@ -1,4 +1,5 @@
 ﻿using CodePulse.API.Models.Domain;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CodePulse.API.Repositories.Interface
 {
@@ -6,7 +7,9 @@ namespace CodePulse.API.Repositories.Interface
     {
         Task<Category> CreatCategoryAsync(Category category);
 
-        Task<IEnumerable<Category>> GetAllCategoriesAsync(string? query = null);
+        Task<IEnumerable<Category>> GetAllCategoriesAsync(string? query = null,
+                                                          string? sortBy = null,
+                                                          string? sortDirection = null);
 
         Task<Category?> GetCategoryByIdAsync(Guid id);
 

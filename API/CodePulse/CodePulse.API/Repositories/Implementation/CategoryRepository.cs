@@ -38,7 +38,9 @@ namespace CodePulse.API.Repositories.Implementation
             
         }
 
-        public async Task<IEnumerable<Category>> GetAllCategoriesAsync(string? query = null)
+        public async Task<IEnumerable<Category>> GetAllCategoriesAsync(string? query = null, 
+                                                                       string? sortBy = null,
+                                                                       string? sortDirection = null)
         {
             // Basic Implementation
            //return await _dbContext.Categories.ToListAsync();
@@ -53,6 +55,34 @@ namespace CodePulse.API.Repositories.Implementation
            }
 
            //Sorting
+           if (string.IsNullOrWhiteSpace(sortBy) == false)
+              {
+                if(string.Equals(sortBy, "Name", StringComparison.OrdinalIgnoreCase))
+                {
+                   var isAscending = string.Equals(sortDirection, "asc", StringComparison.OrdinalIgnoreCase);
+                   if(isAscending)
+                   {
+                      categories = categories.OrderBy(c => c.Name);
+                   }
+                   else
+                   {
+                      categories = categories.OrderByDescending(c => c.Name);
+                   }
+                }
+
+                if (string.Equals(sortBy, "URL", StringComparison.OrdinalIgnoreCase))
+                {
+                    var isAscending = string.Equals(sortDirection, "asc", StringComparison.OrdinalIgnoreCase);
+                    if (isAscending)
+                    {
+                        categories = categories.OrderBy(c => c.UrlHandle);
+                    }
+                    else
+                    {
+                        categories = categories.OrderByDescending(c => c.UrlHandle);
+                    }
+                }
+            }
 
            //Pagination
 
