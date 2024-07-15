@@ -17,8 +17,7 @@ var CategoryService = /** @class */ (function () {
     CategoryService.prototype.addCategory = function (model) {
         return this.http.post(environment_1.environment.apiBaseUrl + "/api/categories", model);
     };
-    CategoryService.prototype.getAllCategories = function (query, sortBy, sortDirection) {
-        //return this.http.get<Category[]>(`${environment.apiBaseUrl}/api/categories`);
+    CategoryService.prototype.getAllCategories = function (query, sortBy, sortDirection, pageNumber, pageSize) {
         var myParams = new http_1.HttpParams();
         if (query) {
             myParams = myParams.set('query', query);
@@ -28,6 +27,12 @@ var CategoryService = /** @class */ (function () {
         }
         if (sortDirection) {
             myParams = myParams.set('sortDirection', sortDirection);
+        }
+        if (pageNumber) {
+            myParams = myParams.set('pageNumber', pageNumber);
+        }
+        if (pageSize) {
+            myParams = myParams.set('pageSize', pageSize);
         }
         return this.http.get(environment_1.environment.apiBaseUrl + "/api/categories", { params: myParams });
     };
@@ -39,6 +44,9 @@ var CategoryService = /** @class */ (function () {
     };
     CategoryService.prototype.deleteCategory = function (id) {
         return this.http["delete"](environment_1.environment.apiBaseUrl + "/api/categories/" + id);
+    };
+    CategoryService.prototype.getCategoriesCount = function () {
+        return this.http.get(environment_1.environment.apiBaseUrl + "/api/categories/count");
     };
     CategoryService = __decorate([
         core_1.Injectable({

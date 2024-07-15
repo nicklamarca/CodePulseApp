@@ -14,15 +14,43 @@ var http_1 = require("@angular/common/http");
 var CategoryListComponent = /** @class */ (function () {
     function CategoryListComponent(categoryService) {
         this.categoryService = categoryService;
+        this.list = [];
+        this.pageNumber = 1;
+        this.pageSize = 9;
     }
     CategoryListComponent.prototype.ngOnInit = function () {
-        this.categories$ = this.categoryService.getAllCategories();
+        var _this = this;
+        this.categoryService.getCategoriesCount().subscribe({
+            next: function (count) {
+                _this.totalCount = count;
+                _this.list = Array(Math.ceil(count / _this.pageSize));
+                _this.categories$ = _this.categoryService.getAllCategories(undefined, undefined, undefined, _this.pageNumber, _this.pageSize);
+            }
+        });
     };
     CategoryListComponent.prototype.onSearch = function (query) {
         this.categories$ = this.categoryService.getAllCategories(query);
     };
     CategoryListComponent.prototype.sort = function (sortBy, sortDirection) {
         this.categories$ = this.categoryService.getAllCategories(undefined, sortBy, sortDirection);
+    };
+    CategoryListComponent.prototype.getPage = function (pageNumber) {
+        this.pageNumber = pageNumber;
+        this.categories$ = this.categoryService.getAllCategories(undefined, undefined, undefined, this.pageNumber, this.pageSize);
+    };
+    CategoryListComponent.prototype.getPrevPage = function () {
+        if (this.pageNumber - 1 < 1) {
+            return;
+        }
+        this.pageNumber -= 1;
+        this.categories$ = this.categoryService.getAllCategories(undefined, undefined, undefined, this.pageNumber, this.pageSize);
+    };
+    CategoryListComponent.prototype.getNextPage = function () {
+        if (this.pageNumber + 1 > this.list.length) {
+            return;
+        }
+        this.pageNumber += 1;
+        this.categories$ = this.categoryService.getAllCategories(undefined, undefined, undefined, this.pageNumber, this.pageSize);
     };
     CategoryListComponent = __decorate([
         core_1.Component({

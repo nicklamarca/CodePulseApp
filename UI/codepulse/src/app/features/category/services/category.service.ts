@@ -19,21 +19,27 @@ export class CategoryService {
     return this.http.post<void>(`${environment.apiBaseUrl}/api/categories`, model);
   }
 
-  getAllCategories(query?: string, sortBy?: string, sortDirection?: string): Observable<Category[]>
+  getAllCategories(query?: string, 
+                   sortBy?: string, sortDirection?: string, 
+                   pageNumber?: number, pageSize?: number): Observable<Category[]>
   {
-    //return this.http.get<Category[]>(`${environment.apiBaseUrl}/api/categories`);
-    
+  
     let myParams = new HttpParams();
 
     if (query) {
       myParams = myParams.set('query', query);
     }
-
     if (sortBy) {
       myParams = myParams.set('sortBy', sortBy);
     }
     if (sortDirection) {
       myParams = myParams.set('sortDirection', sortDirection);
+    }
+    if (pageNumber) {
+      myParams = myParams.set('pageNumber', pageNumber);
+    }
+    if (pageSize) {
+      myParams = myParams.set('pageSize', pageSize);
     }
 
     return this.http.get<Category[]>(`${environment.apiBaseUrl}/api/categories`, { params: myParams });
@@ -53,5 +59,10 @@ export class CategoryService {
   deleteCategory(id: string): Observable<Category>
   {
     return this.http.delete<Category>(`${environment.apiBaseUrl}/api/categories/${id}`);
+  }
+
+  getCategoriesCount(): Observable<number>
+  {
+    return this.http.get<number>(`${environment.apiBaseUrl}/api/categories/count`);
   }
 }
