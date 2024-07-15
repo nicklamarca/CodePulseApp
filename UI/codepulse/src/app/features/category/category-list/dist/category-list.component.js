@@ -18,6 +18,9 @@ var CategoryListComponent = /** @class */ (function () {
     CategoryListComponent.prototype.ngOnInit = function () {
         this.categories$ = this.categoryService.getAllCategories();
     };
+    CategoryListComponent.prototype.onSearch = function (query) {
+        this.categories$ = this.categoryService.getAllCategories(query);
+    };
     CategoryListComponent = __decorate([
         core_1.Component({
             selector: 'app-category-list',
