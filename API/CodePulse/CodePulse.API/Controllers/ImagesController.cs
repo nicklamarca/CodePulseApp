@@ -76,22 +76,6 @@ namespace CodePulse.API.Controllers
             return Ok(response);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         private void ValidateFileUpload(IFormFile file)
         {
             var allowedExtensions = new string[] { ".jpg", ".jpeg", ".png"}; //should move to appsettings.json

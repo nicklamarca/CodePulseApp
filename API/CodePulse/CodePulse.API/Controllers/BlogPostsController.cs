@@ -24,7 +24,7 @@ namespace CodePulse.API.Controllers
 
         //POST {apibaseurl}/api/blogposts
         [HttpPost]
-        [Authorize(Roles = "Writer")]
+        //[Authorize(Roles = "Writer")]
         public async Task<IActionResult> CreateBlogPost([FromBody] CreateBlogPostRequestDto request)
         {
             var blogPost = new BlogPost
@@ -181,7 +181,7 @@ namespace CodePulse.API.Controllers
             //PUT: https://localhost:7024/api/blogposts/{id}
         [HttpPut]
         [Route("{id:Guid}")]
-        [Authorize(Roles = "Writer")]
+        //[Authorize(Roles = "Writer")]
         public async Task<IActionResult> UpdateBlogPost([FromRoute] Guid id, [FromBody] UpdateBlogPostRequestDto request)
         {
             var blogPost = new BlogPost{
@@ -238,7 +238,7 @@ namespace CodePulse.API.Controllers
 
         [HttpDelete]
         [Route("{id:Guid}")]
-        [Authorize(Roles = "Writer")]
+        //[Authorize(Roles = "Writer")]
         public async Task<IActionResult> DeleteBlogPost([FromRoute] Guid id)
         {
             var blogPost = await _blogPostRepository.DeleteBlogPostAsync(id);
