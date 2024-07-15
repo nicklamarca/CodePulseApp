@@ -10,6 +10,8 @@ exports.AppComponent = void 0;
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var navbar_component_1 = require("./core/components/navbar/navbar.component");
+var http_1 = require("@angular/common/http"); // Import HttpClientModule
+var auth_service_1 = require("./features/auth/services/auth.service");
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
         this.title = 'codepulse';
@@ -18,9 +20,10 @@ var AppComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-root',
             standalone: true,
-            imports: [router_1.RouterOutlet, navbar_component_1.NavbarComponent],
+            imports: [router_1.RouterOutlet, navbar_component_1.NavbarComponent, http_1.HttpClientModule],
             templateUrl: './app.component.html',
-            styleUrl: './app.component.css'
+            styleUrl: './app.component.css',
+            providers: [auth_service_1.AuthService]
         })
     ], AppComponent);
     return AppComponent;

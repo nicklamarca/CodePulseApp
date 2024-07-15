@@ -12,6 +12,7 @@ var forms_1 = require("@angular/forms");
 var common_1 = require("@angular/common");
 var ngx_markdown_1 = require("ngx-markdown");
 var image_selector_component_1 = require("../../../shared/components/image-selector/image-selector.component");
+var http_1 = require("@angular/common/http");
 var AddBlogpostComponent = /** @class */ (function () {
     function AddBlogpostComponent(blogPostService, router, categoryService, imageService) {
         this.blogPostService = blogPostService;
@@ -70,7 +71,7 @@ var AddBlogpostComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-add-blogpost',
             standalone: true,
-            imports: [forms_1.FormsModule, common_1.CommonModule, ngx_markdown_1.MarkdownModule, image_selector_component_1.ImageSelectorComponent],
+            imports: [forms_1.FormsModule, common_1.CommonModule, ngx_markdown_1.MarkdownModule, image_selector_component_1.ImageSelectorComponent, http_1.HttpClientModule],
             templateUrl: './add-blogpost.component.html',
             styleUrl: './add-blogpost.component.css'
         })

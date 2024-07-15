@@ -11,6 +11,7 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var common_1 = require("@angular/common");
 var router_1 = require("@angular/router");
+var http_1 = require("@angular/common/http");
 var HomeComponent = /** @class */ (function () {
     function HomeComponent(blogPostService) {
         this.blogPostService = blogPostService;
@@ -22,7 +23,7 @@ var HomeComponent = /** @class */ (function () {
         core_1.Component({
             selector: 'app-home',
             standalone: true,
-            imports: [forms_1.FormsModule, common_1.CommonModule, router_1.RouterModule],
+            imports: [forms_1.FormsModule, common_1.CommonModule, router_1.RouterModule, http_1.HttpClientModule],
             templateUrl: './home.component.html',
             styleUrl: './home.component.css'
         })

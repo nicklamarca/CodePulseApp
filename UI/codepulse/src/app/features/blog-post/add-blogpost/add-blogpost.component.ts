@@ -10,11 +10,12 @@ import { Observable, Subscription } from 'rxjs';
 import { Category } from '../../category/models/category.model';
 import { ImageSelectorComponent } from '../../../shared/components/image-selector/image-selector.component';
 import { ImageService } from '../../../shared/components/image-selector/image.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-blogpost',
   standalone: true,
-  imports: [FormsModule, CommonModule, MarkdownModule, ImageSelectorComponent],
+  imports: [FormsModule, CommonModule, MarkdownModule, ImageSelectorComponent, HttpClientModule],
   templateUrl: './add-blogpost.component.html',
   styleUrl: './add-blogpost.component.css'
 })

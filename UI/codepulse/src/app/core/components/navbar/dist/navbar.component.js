@@ -9,14 +9,26 @@ exports.__esModule = true;
 exports.NavbarComponent = void 0;
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var http_1 = require("@angular/common/http");
 var NavbarComponent = /** @class */ (function () {
-    function NavbarComponent() {
+    function NavbarComponent(authService) {
+        this.authService = authService;
     }
+    NavbarComponent.prototype.ngOnInit = function () {
+        this.authService.user().subscribe({
+            next: function (response) {
+                console.log(response);
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+    };
     NavbarComponent = __decorate([
         core_1.Component({
             selector: 'app-navbar',
             standalone: true,
-            imports: [router_1.RouterLink],
+            imports: [router_1.RouterLink, http_1.HttpClientModule],
             templateUrl: './navbar.component.html',
             styleUrl: './navbar.component.css'
         })

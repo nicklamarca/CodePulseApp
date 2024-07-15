@@ -11,13 +11,14 @@ import { Category } from '../../category/models/category.model';
 import { UpdateBlogPost } from '../models/update-blog-post.model';
 import { ImageSelectorComponent } from "../../../shared/components/image-selector/image-selector.component";
 import { ImageService } from '../../../shared/components/image-selector/image.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
     selector: 'app-edit-blogpost',
     standalone: true,
     templateUrl: './edit-blogpost.component.html',
     styleUrl: './edit-blogpost.component.css',
-    imports: [FormsModule, CommonModule, MarkdownModule, ImageSelectorComponent]
+    imports: [FormsModule, CommonModule, MarkdownModule, ImageSelectorComponent, HttpClientModule]
 })
 export class EditBlogpostComponent implements OnInit, OnDestroy {
 

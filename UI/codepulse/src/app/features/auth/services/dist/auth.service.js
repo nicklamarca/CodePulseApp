@@ -8,10 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.AuthService = void 0;
 var core_1 = require("@angular/core");
+var rxjs_1 = require("rxjs");
 var environment_1 = require("../../../../environments/environment");
 var AuthService = /** @class */ (function () {
     function AuthService(http) {
         this.http = http;
+        this.$user = new rxjs_1.BehaviorSubject(undefined);
     }
     AuthService.prototype.login = function (request) {
         return this.http.post(environment_1.environment.apiBaseUrl + "/api/auth/login", {
@@ -19,9 +21,20 @@ var AuthService = /** @class */ (function () {
             password: request.password
         });
     };
+    AuthService.prototype.setUser = function (user) {
+        //this.$user.next(user);
+        localStorage.setItem('user-email', user.email);
+        localStorage.setItem('user-roles', user.roles.join(','));
+    };
+    AuthService.prototype.user = function () {
+        return this.$user.asObservable();
+    };
+    AuthService.prototype.test = function () {
+        console.log("testing 123");
+    };
     AuthService = __decorate([
         core_1.Injectable({
-            providedIn: 'root'
+            providedIn: 'root' // Ensure this is provided in the root injector
         })
     ], AuthService);
     return AuthService;
