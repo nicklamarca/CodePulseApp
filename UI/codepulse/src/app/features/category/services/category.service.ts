@@ -19,7 +19,7 @@ export class CategoryService {
     return this.http.post<void>(`${environment.apiBaseUrl}/api/categories`, model);
   }
 
-  getAllCategories(query?: string): Observable<Category[]>
+  getAllCategories(query?: string, sortBy?: string, sortDirection?: string): Observable<Category[]>
   {
     //return this.http.get<Category[]>(`${environment.apiBaseUrl}/api/categories`);
     
@@ -27,6 +27,13 @@ export class CategoryService {
 
     if (query) {
       myParams = myParams.set('query', query);
+    }
+
+    if (sortBy) {
+      myParams = myParams.set('sortBy', sortBy);
+    }
+    if (sortDirection) {
+      myParams = myParams.set('sortDirection', sortDirection);
     }
 
     return this.http.get<Category[]>(`${environment.apiBaseUrl}/api/categories`, { params: myParams });

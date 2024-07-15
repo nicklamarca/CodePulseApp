@@ -21,6 +21,9 @@ var CategoryListComponent = /** @class */ (function () {
     CategoryListComponent.prototype.onSearch = function (query) {
         this.categories$ = this.categoryService.getAllCategories(query);
     };
+    CategoryListComponent.prototype.sort = function (sortBy, sortDirection) {
+        this.categories$ = this.categoryService.getAllCategories(undefined, sortBy, sortDirection);
+    };
     CategoryListComponent = __decorate([
         core_1.Component({
             selector: 'app-category-list',

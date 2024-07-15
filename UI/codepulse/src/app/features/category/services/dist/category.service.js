@@ -17,11 +17,17 @@ var CategoryService = /** @class */ (function () {
     CategoryService.prototype.addCategory = function (model) {
         return this.http.post(environment_1.environment.apiBaseUrl + "/api/categories", model);
     };
-    CategoryService.prototype.getAllCategories = function (query) {
+    CategoryService.prototype.getAllCategories = function (query, sortBy, sortDirection) {
         //return this.http.get<Category[]>(`${environment.apiBaseUrl}/api/categories`);
         var myParams = new http_1.HttpParams();
         if (query) {
             myParams = myParams.set('query', query);
+        }
+        if (sortBy) {
+            myParams = myParams.set('sortBy', sortBy);
+        }
+        if (sortDirection) {
+            myParams = myParams.set('sortDirection', sortDirection);
         }
         return this.http.get(environment_1.environment.apiBaseUrl + "/api/categories", { params: myParams });
     };
