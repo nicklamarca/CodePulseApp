@@ -38,7 +38,7 @@ var AddBlogpostComponent = /** @class */ (function () {
     };
     AddBlogpostComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.categories$ = this.categoryService.getAllCategories();
+        this.categories$ = this.categoryService.getAllCategories(undefined, undefined, undefined, 1, 20);
         this.imageSelectorSubscription = this.imageService.onSelectImage()
             .subscribe({
             next: function (selectedImage) {

@@ -19,7 +19,7 @@ export class CategoryListComponent implements OnInit {
   totalCount: number | undefined;
   list: number[] = [];
   pageNumber: number = 1;
-  pageSize: number = 9;
+  pageSize: number = 20;
 
   constructor(private categoryService: CategoryService)
   {}
@@ -62,7 +62,7 @@ export class CategoryListComponent implements OnInit {
       }
 
       this.pageNumber -= 1;
-      
+
       this.categories$ = this.categoryService.getAllCategories(undefined, undefined, undefined, this.pageNumber, this.pageSize);
     }
 

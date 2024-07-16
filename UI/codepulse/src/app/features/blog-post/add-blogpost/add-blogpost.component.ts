@@ -47,7 +47,7 @@ export class AddBlogpostComponent implements OnInit, OnDestroy {
     this.imageSelectorSubscription?.unsubscribe();
   }
   ngOnInit(): void {
-     this.categories$ = this.categoryService.getAllCategories();
+     this.categories$ = this.categoryService.getAllCategories(undefined, undefined, undefined, 1, 20);
 
      this.imageSelectorSubscription = this.imageService.onSelectImage()
      .subscribe({

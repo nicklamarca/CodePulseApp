@@ -16,7 +16,7 @@ var CategoryListComponent = /** @class */ (function () {
         this.categoryService = categoryService;
         this.list = [];
         this.pageNumber = 1;
-        this.pageSize = 9;
+        this.pageSize = 20;
     }
     CategoryListComponent.prototype.ngOnInit = function () {
         var _this = this;

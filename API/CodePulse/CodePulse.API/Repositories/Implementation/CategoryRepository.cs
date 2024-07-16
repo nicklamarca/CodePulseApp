@@ -42,7 +42,7 @@ namespace CodePulse.API.Repositories.Implementation
                                                                        string? sortBy = null,
                                                                        string? sortDirection = null,
                                                                        int? pageNumber = 1,
-                                                                       int? pageSize = 10)
+                                                                       int? pageSize = 20)
         {
             // Basic Implementation
            //return await _dbContext.Categories.ToListAsync();

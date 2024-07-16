@@ -78,7 +78,7 @@ var EditBlogpostComponent = /** @class */ (function () {
     };
     EditBlogpostComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.categories$ = this.categoryService.getAllCategories();
+        this.categories$ = this.categoryService.getAllCategories(undefined, undefined, undefined, 1, 20);
         this.routeSubscription = this.route.paramMap.subscribe({
             next: function (params) {
                 _this.id = params.get('id');

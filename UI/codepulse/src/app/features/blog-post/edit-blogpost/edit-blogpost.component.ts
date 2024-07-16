@@ -105,7 +105,7 @@ export class EditBlogpostComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
    
-   this.categories$ = this.categoryService.getAllCategories();
+   this.categories$ = this.categoryService.getAllCategories(undefined, undefined, undefined, 1, 20);
   
    this.routeSubscription = this.route.paramMap.subscribe({
       next: (params) => {
